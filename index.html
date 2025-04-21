@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Astro Weight Calculator</title>
+
+    <!-- CSS and other head elements -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/main.js" defer></script>
+  </head>
+  <body>
+    <!--========================-->
+    <!-- Main Calculator Layout -->
+    <!--========================-->
+    <main>
+      <div class="calculator-container">
+        <!--================-->
+        <!-- Input Controls -->
+        <!--================-->
+        <section class="input-section">
+          <form id="weight-form" class="input-container">
+            <div class="terminal-panel">
+              <div class="terminal-panel-header">ASTRO WEIGHT CALCULATOR | <a href="#">Source Code</a></div>
+                <div class="terminal-panel-content visually-hidden">
+                  <!-- Results Display -->
+                  <div class="result-container">
+                    <p id="output"></p>
+                  </div>
+                </div>
+              <div class="terminal-panel-header">Weight Input</div>
+              <div class="terminal-panel-content">
+                <fieldset class="user-weight-input terminal-style">
+                  <legend>ENTER WEIGHT:</legend>
+                    <!-- Pounds and Kilograms Input Groups -->
+                    <div class="weight-input-container">
+                      <!-- Pounds Input -->
+                      <div class="weight-input-group">
+                        <input
+                          id="user-weight"
+                          type="number"
+                          placeholder="_"
+                          aria-label="Weight in pounds"
+                        />
+                        <label for="user-weight">LBS</label>
+                      </div>
+
+                      <div class="weight-separator">OR</div>
+                
+
+                      <!-- Kilograms Input -->
+                      <div class="weight-input-group">
+                        <input
+                          id="user-weight-kgs"
+                          type="number"
+                          placeholder="_"
+                          aria-label="Weight in kilograms"
+                        />
+                        <label for="user-weight-kgs">KGS</label>
+                      </div>
+                    </div>
+                  </fieldset>
+              </div>
+            </div>
+            
+            <!--=== Filter Controls ===-->
+            <div class="terminal-panel">
+              <div class="terminal-panel-header">Filter Controls</div>
+              <div class="terminal-panel-content">
+                <fieldset class="terminal-style">
+                  <legend>CELESTIAL BODY OPTIONS</legend>
+                  <small>
+                    Note: Natural satellites will appear at the end of the list
+                  </small>
+                  <div>
+                    <input type="checkbox" id="terrestrial" checked />
+                    <label for="terrestrial">Terrestrial</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="gasGiants" checked />
+                    <label for="gas-giants">Gas giants</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="iceGiants" checked />
+                    <label for="ice-giants">Ice Giants</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="dwarfPlanets" checked />
+                    <label for="dwarf-planets">Dwarf Planets</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="stars" checked />
+                    <label for="stars">Stars</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="naturalSatellites" checked />
+                    <label for="natural-satellites">Natural Satellites</label>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+
+            <!--=== Entity Selection ===-->
+            <div class="terminal-panel">
+              <div class="terminal-panel-header">Entity Selection</div>
+              <div class="terminal-panel-content">
+                <fieldset class="terminal-style">
+                  <legend>SELECT ENTITY:</legend>
+                    <div class="flex-container">
+                      <div class="entity-select-group">
+                        <select required id="planets">
+                          <option value="">Select here...</option>
+                          <option value="Pluto">Pluto</option>
+                          <option value="Neptune">Neptune</option>
+                          <option value="Uranus">Uranus</option>
+                          <option value="Saturn">Saturn</option>
+                          <option value="Jupiter">Jupiter</option>
+                          <option value="Mars">Mars</option>
+                          <option value="Moon">Moon</option>
+                          <option value="Earth">Earth</option>
+                          <option value="Venus">Venus</option>
+                          <option value="Mercury">Mercury</option>
+                          <option value="Sun">Sun</option>
+                        </select>
+                      </div>
+                      <div>
+                        <input type="checkbox" id="naturalSort" />
+                        <label for="naturalSort">Sort Entities by Natural Order</label>
+                      </div>
+                    </div>
+                  </fieldset>
+              </div>
+            </div>
+
+            
+
+            <!--=== Command Controls ===-->
+            <div class="terminal-panel">
+              <div class="terminal-panel-header">Command Controls</div>
+              <div class="terminal-panel-content">
+                <div id="control-buttons">
+                  <button id="reset-button">Reset</button>
+                  <button id="calculate-button">Calculate</button>
+                  <button id="clear-log">Clear History</button>
+                </div>
+              </div>
+            </div>
+
+            <!--=== Celestial Body Fact Sheet ===-->
+            <div class="terminal-panel">
+              <div class="terminal-panel-header">Celestial Body Fact Sheet</div>
+              <div class="terminal-panel-content">
+                <fieldset class="fact-sheet terminal-style">
+                  <legend>ENTITY DETAILS:</legend>
+                  
+                  <!-- Fact Sheet Display -->
+                  <div class="fact-sheet-container">
+                    <!-- Left side with wireframe visualization -->
+                    <div class="visualization-container">
+                      <div id="entity-wireframe" class="wireframe-display">
+                        <!-- Wireframe will be displayed here -->
+                        <div class="placeholder-message">Select an entity to view details</div>
+                      </div>
+                    </div>
+                    
+                    <!-- Right side with facts -->
+                    <div class="facts-container">
+                      <div id="entity-facts" class="facts-list">
+                        <!-- Facts will be populated here -->
+                        <div class="fact-item">
+                          <span class="fact-label">DIAMETER:</span>
+                          <span class="fact-value" id="fact-diameter">--</span>
+                        </div>
+                        <div class="fact-item">
+                          <span class="fact-label">GRAVITY:</span>
+                          <span class="fact-value" id="fact-gravity">--</span>
+                        </div>
+                        <div class="fact-item">
+                          <span class="fact-label">DAY LENGTH:</span>
+                          <span class="fact-value" id="fact-day-length">--</span>
+                        </div>
+                        <div class="fact-item">
+                          <span class="fact-label">YEAR LENGTH:</span>
+                          <span class="fact-value" id="fact-year-length">--</span>
+                        </div>
+                        <div class="fact-item">
+                          <span class="fact-label">TEMPERATURE:</span>
+                          <span class="fact-value" id="fact-temperature">--</span>
+                        </div>
+                        <div class="fact-item">
+                          <span class="fact-label">MOONS:</span>
+                          <span class="fact-value" id="fact-moons">--</span>
+                        </div>
+                        <div class="fact-item fun-fact">
+                          <span class="fact-label">FUN FACT:</span>
+                          <span class="fact-value" id="fact-fun-fact">--</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <!--================-->
+        <!-- Output Display -->
+        <!--================-->
+        <section class="output-section">
+          <div class="terminal-panel">
+            <div class="terminal-panel-header">
+              A <a href="https://learn.cccareers.org" target="_blank">Creating Coding Careers</a> Project | UI/UX Design by Claro Runtal
+            </div>
+            <div class="terminal-panel-content visually-hidden">
+              <!-- Results Display -->
+              <div class="result-container">
+                <p id="output"></p>
+              </div>
+            </div>
+          
+          <div class="terminal-panel">
+            <div class="terminal-panel-header">MISSION CONTROL LOG</div>
+            <div class="terminal-panel-content">
+              <!-- Command Log -->
+              <div id="weight-log-section">
+                <div id="log-entries">
+                  <!-- recorded calculations -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
